@@ -12,10 +12,12 @@ public class OrbitCamera : MonoBehaviour
     
     [Tooltip("What the camera should follow")]
     public Transform focus;
-    [Tooltip("How long away from the focus the camera should be when starting out"), Range(1f, 20f)]
-    public float cameraDistance = 5f;
+    [Tooltip("How long away from the focus the camera should be when starting out"), Range(1f, 40f)]
+    public float cameraDistance = 40f;
     [Tooltip("The speed of manual/automatic camera orbits"), Range(1f, 360f)]
     public float rotationSpeed = 90f;
+    [Tooltip("How much the center of the focus should be offset (if any)")]
+    public Vector3 centerOffset = Vector3.zero;
     
     [Header("Zoom settings")]
     
@@ -37,6 +39,8 @@ public class OrbitCamera : MonoBehaviour
 
     [Header("Manual camera orbit settings")]
     
+    [Tooltip("Whether or not to enable manual camera orbiting using the mouse")]
+    public bool enableManualOrbit = true;
     [Tooltip("The min angle to clamp camera's vertical orbit to"), Range(-90f, 90f)]
     public float minVerticalAngle = -30f;
     [Tooltip("The max angle to clamp camera's vertical orbit to"), Range(-90f, 90f)]
@@ -91,15 +95,21 @@ public class OrbitCamera : MonoBehaviour
         ManualZoom();
         Quaternion cameraRotation;
         bool automaticRotation = false; // bool to store the response of the method AutomaticRotation()
+        bool manualRotation = false;
+
+        if (enableManualOrbit)
+        {
+            manualRotation = ManualRotation();
+        }
         
         if (enableAutomaticAligning)
         {
             automaticRotation = AutomaticRotation();
         }
 
-        if (ManualRotation() || automaticRotation)
+        if (manualRotation || automaticRotation)
         {
-            ConstrainAngles();
+            //ConstrainAngles();
             cameraRotation = Quaternion.Euler(_cameraRotationEuler);
         }
         else
@@ -107,13 +117,13 @@ public class OrbitCamera : MonoBehaviour
             cameraRotation = transform.localRotation;
         }
         Vector3 lookDirection = cameraRotation * Vector3.forward;
-        Vector3 cameraPosition = _focusPoint - lookDirection * cameraDistance;
+        Vector3 cameraPosition = (_focusPoint - lookDirection * cameraDistance) + centerOffset;
         
         if (Physics.Raycast(_focusPoint, -lookDirection, out RaycastHit hit, cameraDistance))
         {
-            cameraPosition = _focusPoint - lookDirection * hit.distance;
+            cameraPosition = (_focusPoint - lookDirection * hit.distance) + centerOffset;
         }
-        
+
         _transform.SetPositionAndRotation(cameraPosition, cameraRotation);
     }
 
@@ -144,7 +154,7 @@ public class OrbitCamera : MonoBehaviour
     {
         Vector2 input = new Vector2(-cameraVerticalInput, cameraHorizontalInput);
         const float e = 0.001f;
-        if (input.x < -e || input.x > e || input.y < -e || input.y > e)
+        if (input.x < -e || input.x > e || input.y < -e || input.y > e && enableManualOrbit)
         {
             if (!invertAxis)
             {

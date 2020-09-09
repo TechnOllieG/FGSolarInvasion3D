@@ -14,19 +14,19 @@ namespace FG
 
         public float mouseSensitivity = 1f;
 
-        private PlayerMovement _playerMovement;
+        private MovementController _movementController;
         private OrbitCamera _cameraController;
 
         private void Awake()
         {
-            _playerMovement = GetComponent<PlayerMovement>();
+            _movementController = GetComponent<MovementController>();
             _cameraController = GameManager.PlayerCamera.GetComponent<OrbitCamera>();
         }
 
         private void Update()
         {
-            _playerMovement.forwardBackMovement = Input.GetAxis(forwardBackMovement);
-            _playerMovement.leftRightMovement = Input.GetAxis(leftRightMovement);
+            _movementController.forwardBackInput = Input.GetAxis(forwardBackMovement);
+            _movementController.leftRightInput = Input.GetAxis(leftRightMovement);
             
             _cameraController.cameraHorizontalInput = Input.GetAxis(orbitCamera) * mouseSensitivity;
             _cameraController.cameraVerticalInput = Input.GetAxis(pitchCamera) * mouseSensitivity;
