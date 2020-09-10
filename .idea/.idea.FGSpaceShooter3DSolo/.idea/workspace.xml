@@ -20,11 +20,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc899c2c-2f65-4567-b5d2-129a5c1527f8" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Assets/Scenes.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Player/MovementController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FGSpaceShooter3DSolo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FGSpaceShooter3DSolo/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FGSpaceShooter3DSolo/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FGSpaceShooter3DSolo/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FGSpaceShooter3DSolo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FGSpaceShooter3DSolo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Environment.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Player/OrbitCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Player/OrbitCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Player/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Player/PlayerInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Player/PlayerMovement.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Player/PlayerMovement.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Player/MovementController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+>>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,13 +53,27 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+<<<<<<< HEAD
+=======
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Player/Crosshair.cs" root0="FORCE_HIGHLIGHTING" />
+>>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Environment/ReverseNormals.cs" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Game/Scripts/Player/PlayerMovement.cs" />
+=======
+        <option value="$PROJECT_DIR$/Assets/Game/Scripts/Crosshair.cs" />
+        <option value="$PROJECT_DIR$/Assets/Game/Scripts/Player/Crosshair.cs" />
+        <option value="$PROJECT_DIR$/Assets/Game/Scripts/Player/PlayerInput.cs" />
+        <option value="$PROJECT_DIR$/Assets/Game/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Game/Scripts/Player/PlayerMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Game/Scripts/Player/OrbitCamera.cs" />
+        <option value="$PROJECT_DIR$/Assets/Game/Scripts/Player/MovementController.cs" />
+>>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
       </list>
     </option>
   </component>
@@ -55,6 +86,15 @@
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
+=======
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+>>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -86,6 +126,12 @@
       <updated>1599554868170</updated>
       <workItem from="1599554873045" duration="627000" />
       <workItem from="1599574332232" duration="1626000" />
+<<<<<<< HEAD
+=======
+      <workItem from="1599661445444" duration="35000" />
+      <workItem from="1599661897907" duration="13000" />
+      <workItem from="1599661982654" duration="14615000" />
+>>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
     </task>
     <servers />
   </component>
@@ -104,6 +150,10 @@
         </entry>
       </map>
     </option>
+<<<<<<< HEAD
+=======
+    <option name="oldMeFiltersMigrated" value="true" />
+>>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
