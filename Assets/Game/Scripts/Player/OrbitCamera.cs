@@ -12,20 +12,15 @@ public class OrbitCamera : MonoBehaviour
     
     [Tooltip("What the camera should follow")]
     public Transform focus;
-<<<<<<< HEAD
-    [Tooltip("How long away from the focus the camera should be when starting out"), Range(1f, 20f)]
-    public float cameraDistance = 5f;
-    [Tooltip("The speed of manual/automatic camera orbits"), Range(1f, 360f)]
-    public float rotationSpeed = 90f;
-=======
     [Tooltip("How long away from the focus the camera should be when starting out"), Range(1f, 40f)]
     public float cameraDistance = 40f;
     [Tooltip("The speed of manual/automatic camera orbits"), Range(1f, 360f)]
     public float rotationSpeed = 90f;
     [Tooltip("How much the center of the focus should be offset (if any)")]
     public Vector3 centerOffset = Vector3.zero;
->>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
-    
+    [Tooltip("Change to true if you use the camera to follow a flying vehicle. Will allow camera to follow the rotation of the vehicle")]
+    public bool enableFlightRotations = false;
+
     [Header("Zoom settings")]
     
     [Tooltip("If zooming in and out should be allowed")]
@@ -45,12 +40,9 @@ public class OrbitCamera : MonoBehaviour
     public float focusCentering = 0.75f;
 
     [Header("Manual camera orbit settings")]
-    
-<<<<<<< HEAD
-=======
+
     [Tooltip("Whether or not to enable manual camera orbiting using the mouse")]
     public bool enableManualOrbit = true;
->>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
     [Tooltip("The min angle to clamp camera's vertical orbit to"), Range(-90f, 90f)]
     public float minVerticalAngle = -30f;
     [Tooltip("The max angle to clamp camera's vertical orbit to"), Range(-90f, 90f)]
@@ -79,6 +71,7 @@ public class OrbitCamera : MonoBehaviour
     #region PrivateVariables
     private Transform _transform;
     private Vector3 _focusPoint, _previousFocusPoint;
+    private Quaternion _focusRotation, _previousFocusRotation;
     private Vector2 _cameraRotationEuler = new Vector2(45f, 0f);
     private float _lastManualRotationTime;
     #endregion
@@ -96,6 +89,9 @@ public class OrbitCamera : MonoBehaviour
     {
         _transform = transform;
         _focusPoint = focus.position;
+        
+        _focusRotation = focus.localRotation;
+        _previousFocusRotation = _focusRotation;
         transform.localRotation = Quaternion.Euler(_cameraRotationEuler);
     }
 
@@ -105,30 +101,27 @@ public class OrbitCamera : MonoBehaviour
         ManualZoom();
         Quaternion cameraRotation;
         bool automaticRotation = false; // bool to store the response of the method AutomaticRotation()
-<<<<<<< HEAD
-=======
         bool manualRotation = false;
+        bool flightRotation = false;
 
         if (enableManualOrbit)
         {
             manualRotation = ManualRotation();
         }
->>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
-        
+
         if (enableAutomaticAligning)
         {
             automaticRotation = AutomaticRotation();
         }
 
-<<<<<<< HEAD
-        if (ManualRotation() || automaticRotation)
+        if (enableFlightRotations)
+        {
+            flightRotation = FlightRotation();
+        }
+
+        if (manualRotation || automaticRotation || flightRotation)
         {
             ConstrainAngles();
-=======
-        if (manualRotation || automaticRotation)
-        {
-            //ConstrainAngles();
->>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
             cameraRotation = Quaternion.Euler(_cameraRotationEuler);
         }
         else
@@ -136,23 +129,13 @@ public class OrbitCamera : MonoBehaviour
             cameraRotation = transform.localRotation;
         }
         Vector3 lookDirection = cameraRotation * Vector3.forward;
-<<<<<<< HEAD
-        Vector3 cameraPosition = _focusPoint - lookDirection * cameraDistance;
-        
-        if (Physics.Raycast(_focusPoint, -lookDirection, out RaycastHit hit, cameraDistance))
-        {
-            cameraPosition = _focusPoint - lookDirection * hit.distance;
-        }
-        
-=======
         Vector3 cameraPosition = (_focusPoint - lookDirection * cameraDistance) + centerOffset;
         
         if (Physics.Raycast(_focusPoint, -lookDirection, out RaycastHit hit, cameraDistance))
         {
             cameraPosition = (_focusPoint - lookDirection * hit.distance) + centerOffset;
         }
-
->>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
+        
         _transform.SetPositionAndRotation(cameraPosition, cameraRotation);
     }
 
@@ -183,11 +166,8 @@ public class OrbitCamera : MonoBehaviour
     {
         Vector2 input = new Vector2(-cameraVerticalInput, cameraHorizontalInput);
         const float e = 0.001f;
-<<<<<<< HEAD
+
         if (input.x < -e || input.x > e || input.y < -e || input.y > e)
-=======
-        if (input.x < -e || input.x > e || input.y < -e || input.y > e && enableManualOrbit)
->>>>>>> 20a66d1a13151c70b8c5d2739206a4bc29049d41
         {
             if (!invertAxis)
             {
@@ -219,16 +199,19 @@ public class OrbitCamera : MonoBehaviour
     
     private bool AutomaticRotation()
     {
+        // If it has been alignDelay secs since last ManualRotation or over
         if (Time.unscaledTime - _lastManualRotationTime < alignDelay)
         {
             return false;
         }
         
+        // Calculates movement vector between where the object is now and where it was a little while ago
         Vector2 movement = new Vector2
         (
             _focusPoint.x - _previousFocusPoint.x,
             _focusPoint.z - _previousFocusPoint.z
         );
+        // Returns the squared length of movement vectors
         float movementDeltaSqr = movement.sqrMagnitude;
         if (movementDeltaSqr < 0.000001f)
         {
@@ -249,6 +232,13 @@ public class OrbitCamera : MonoBehaviour
             Mathf.MoveTowardsAngle(_cameraRotationEuler.y, headingAngle, rotationChange);
         
         return true;
+    }
+
+    private bool FlightRotation()
+    {
+        _cameraRotationEuler = _focusRotation.eulerAngles;
+        _previousFocusRotation = _focusRotation;
+       return true;
     }
     
     private static float GetAngle(Vector2 direction)
