@@ -12,9 +12,12 @@ GameObject:
   - component: {fileID: 8888612023890860304}
   - component: {fileID: 8888612023890860311}
   - component: {fileID: 8888612023890860310}
+  - component: {fileID: 1052060463}
+  - component: {fileID: 1052060460}
+  - component: {fileID: 1052060459}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +61,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 30
+  m_AngularDrag: 10
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -78,8 +81,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 30
   minInputMagnitude: 0.01
-  pitchSpeed: 1
-  rollSpeed: 1
+  pitchSpeed: 2
+  rollSpeed: 2
+--- !u!114 &1052060463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888612023890860309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbab4ecbb5377174eaf73d581d59e9b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftWeapon: {fileID: 8888612024558767993}
+  rightWeapon: {fileID: 8888612023370174121}
+  selectedWeapon: 0
+--- !u!114 &1052060460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888612023890860309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11516347b64551459b3ae457c61404e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptName: LaserWeapon
+  weaponShootingOrder: 0
+--- !u!114 &1052060459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888612023890860309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0104fcf7fc843dc46b3c9a22e9b0d1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptName: LaserWeapon
+  weaponShootingOrder: 1
 --- !u!1 &8888612024886957715
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +182,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -170,6 +216,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8888612023890860305}
     m_Modifications:
+    - target: {fileID: 329373686, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 329373686, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 329373686, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518884390, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518884390, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518884390, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 6484114323859538870, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -223,5 +293,15 @@ PrefabInstance:
 --- !u!4 &2496826070267108074 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6484114323859538870, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+  m_PrefabInstance: {fileID: 8888612023057717596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8888612024558767993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1518884389, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
+  m_PrefabInstance: {fileID: 8888612023057717596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8888612023370174121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 329373685, guid: 6634c9386b939e94f8e3069bc771b941, type: 3}
   m_PrefabInstance: {fileID: 8888612023057717596}
   m_PrefabAsset: {fileID: 0}

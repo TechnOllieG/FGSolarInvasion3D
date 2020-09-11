@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FG
@@ -25,7 +26,7 @@ namespace FG
         public GameObject rightWeapon;
         public int selectedWeapon = 0;
 
-        private List<Weapon> _weapons = new List<Weapon>();
+        [NonSerialized] public List<Weapon> weapons = new List<Weapon>();
 
         private void Awake()
         {
@@ -33,9 +34,12 @@ namespace FG
 
             foreach (IWeapon tempScript in tempWeapons)
             {
-                string tempName = tempScript.Name();
-                WeaponShootingOrder tempOrder = tempScript.ShootingOrder();
-                _weapons.Add(new Weapon() {Script = tempScript, Name = tempName, ShootingOrder = tempOrder});
+                if (tempScript.CheckEnable())
+                {
+                    string tempName = tempScript.Name();
+                    WeaponShootingOrder tempOrder = tempScript.ShootingOrder();
+                    weapons.Add(new Weapon() {Script = tempScript, Name = tempName, ShootingOrder = tempOrder});
+                }
             }
         }
 
@@ -44,8 +48,17 @@ namespace FG
             if (other.CompareTag("WeaponPickup"))
             {
                 WeaponPickup currentPickup = other.gameObject.GetComponent<WeaponPickup>();
-                //currentPickup.scriptToApply.Name;
-                //IWeapon temp = AddComponent()
+                string scriptName = currentPickup.script;
+                
+                IWeapon tempScript = (IWeapon)GetComponent(scriptName);
+                
+                string tempName = tempScript.Name();
+                WeaponShootingOrder tempOrder = tempScript.ShootingOrder(); 
+                
+                weapons.Add(new Weapon() {Script = tempScript, Name = tempName, ShootingOrder = tempOrder});
+                
+                tempScript.Enable();
+                Destroy(other.gameObject);
             }
         }
     }
