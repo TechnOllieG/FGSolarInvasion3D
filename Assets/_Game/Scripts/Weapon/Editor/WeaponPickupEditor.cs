@@ -19,7 +19,7 @@ namespace FG
 
             for (int i = 0; i < playerWeapons.Length; i++)
             {
-                _scripts[i] = playerWeapons[i].Name();
+                _scripts[i] = playerWeapons[i].Name;
             }
 
             _choiceIndex = weaponPickup.choiceIndex;

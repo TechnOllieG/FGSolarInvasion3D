@@ -2,11 +2,8 @@
 {
     public interface IWeapon
     {
-        void Enable();
-        void Disable();
-        bool CheckEnable();
-        string Name();
-        WeaponShootingOrder ShootingOrder();
+        bool Enabled { get; set; }
+        string Name { get; }
         void Shoot();
     }
 }

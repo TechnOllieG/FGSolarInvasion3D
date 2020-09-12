@@ -5,32 +5,13 @@ namespace FG
     public class BaseWeapon : MonoBehaviour
     {
         public bool enableScript = false;
-        public string scriptName = "Missile";
-        public WeaponShootingOrder weaponShootingOrder = WeaponShootingOrder.Alternating;
-        
-        public void Enable()
-        {
-            enableScript = true;
-        }
 
-        public void Disable()
-        {
-            enableScript = false;
-        }
+        public string Name => GetType().Name.ToString();
 
-        public bool CheckEnable()
+        public bool Enabled
         {
-            return enableScript;
-        }
-
-        public string Name()
-        {
-            return scriptName;
-        }
-        
-        public WeaponShootingOrder ShootingOrder()
-        {
-            return weaponShootingOrder;
+            get => enableScript;
+            set => enableScript = value;
         }
     }
 }

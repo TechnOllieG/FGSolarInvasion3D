@@ -4,22 +4,12 @@ using UnityEngine;
 
 namespace FG
 {
-    public enum WeaponShootingOrder
-    {
-        BothAtSameTime,
-        Alternating,
-        RightWeaponOnly,
-        LeftWeaponOnly,
-    }
-
     public class Weapon
     {
         public IWeapon Script { get; set; }
         public string Name { get; set; }
-        public WeaponShootingOrder ShootingOrder { get; set; }
     }
     
-    [DefaultExecutionOrder(0)]
     public class WeaponManager : MonoBehaviour
     {
         public GameObject leftWeapon;
@@ -34,11 +24,10 @@ namespace FG
 
             foreach (IWeapon tempScript in tempWeapons)
             {
-                if (tempScript.CheckEnable())
+                if (tempScript.Enabled)
                 {
-                    string tempName = tempScript.Name();
-                    WeaponShootingOrder tempOrder = tempScript.ShootingOrder();
-                    weapons.Add(new Weapon() {Script = tempScript, Name = tempName, ShootingOrder = tempOrder});
+                    string tempName = tempScript.Name;
+                    weapons.Add(new Weapon() {Script = tempScript, Name = tempName});
                 }
             }
         }
@@ -51,13 +40,11 @@ namespace FG
                 string scriptName = currentPickup.script;
                 
                 IWeapon tempScript = (IWeapon)GetComponent(scriptName);
+                string tempName = tempScript.Name;
+
+                weapons.Add(new Weapon() {Script = tempScript, Name = tempName});
                 
-                string tempName = tempScript.Name();
-                WeaponShootingOrder tempOrder = tempScript.ShootingOrder(); 
-                
-                weapons.Add(new Weapon() {Script = tempScript, Name = tempName, ShootingOrder = tempOrder});
-                
-                tempScript.Enable();
+                tempScript.Enabled = true;
                 Destroy(other.gameObject);
             }
         }
