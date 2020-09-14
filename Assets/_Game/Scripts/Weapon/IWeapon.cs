@@ -4,6 +4,6 @@
     {
         bool Enabled { get; set; }
         string Name { get; }
-        void Shoot();
+        float Shoot();
     }
 }

@@ -4,9 +4,11 @@ namespace FG
 {
     public class Missile : BaseWeapon, IWeapon
     {
-        public void Shoot()
+        public float coolDown = 5f;
+        public float Shoot()
         {
             
+            return coolDown;
         }
     }
 }

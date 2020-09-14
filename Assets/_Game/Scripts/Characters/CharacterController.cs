@@ -12,9 +12,9 @@ namespace FG
         public float minInputMagnitude = 0.01f;
         
         [Tooltip("Speed for ship's pitch rotation")]
-        public float pitchSpeed = 1f;
+        public float pitchSpeed = 2f;
         [Tooltip("Speed for ship's roll rotation")]
-        public float rollSpeed = 0.5f;
+        public float yawSpeed = 2f;
 
         [NonSerialized] public float leftRightInput;
         [NonSerialized] public float forwardBackInput;
@@ -54,7 +54,7 @@ namespace FG
             
             if (leftRightInput > minInputMagnitude || leftRightInput < -minInputMagnitude)
             {
-                _playerEulerRotation.z = -leftRightInput * rollSpeed;
+                _playerEulerRotation.y = leftRightInput * yawSpeed;
                 response = true;
             }
             return response;

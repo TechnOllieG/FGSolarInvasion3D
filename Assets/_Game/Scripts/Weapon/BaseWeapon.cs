@@ -13,5 +13,14 @@ namespace FG
             get => enableScript;
             set => enableScript = value;
         }
+        
+        protected Transform leftWeaponTransform;
+        protected Transform rightWeaponTransform;
+
+        private void Awake()
+        {
+            leftWeaponTransform = GameManager.WeaponManager.leftWeapon.transform;
+            rightWeaponTransform = GameManager.WeaponManager.rightWeapon.transform;
+        }
     }
 }
