@@ -48,11 +48,8 @@ namespace FG
                 _cameraController.cameraZoomInput = Input.GetAxis(scrollWheel);
             }
             
-            if (_weaponManager == isActiveAndEnabled)
-            {
-                _weaponManager.SelectedWeapon += Convert.ToInt16(Input.GetAxis(scrollWheel) * 10);
-                _weaponManager.fireWeapon = Input.GetMouseButton((int)shootButton);
-            }
+            _weaponManager.SelectedWeapon = Convert.ToInt16(Input.GetAxis(scrollWheel) * 10);
+            _weaponManager.fireWeapon = Input.GetMouseButton((int)shootButton);
         }
     }
 }

@@ -15,21 +15,49 @@ namespace FG
     {
         public int SelectedWeapon
         {
-            get => selectedWeapon;
-            set => selectedWeapon = Mathf.Clamp(value, 0, _numberOfWeapons - 1);
+            get => _selectedWeapon;
+            set
+            {
+                if (value > 0)
+                {
+                    int tempValue = _selectedWeapon + 1;
+                    if (tempValue > _numberOfWeapons - 1)
+                    {
+                        _selectedWeapon = 0;
+                    }
+                    else
+                    {
+                        _selectedWeapon = tempValue;
+                    }
+                }
+                else if (value < 0)
+                {
+                    int tempValue = _selectedWeapon - 1;
+                    if (tempValue < 0)
+                    {
+                        _selectedWeapon = _numberOfWeapons - 1;
+                    }
+                    else
+                    {
+                        _selectedWeapon = tempValue;
+                    }
+                }
+            }
         }
 
         public Text selectedWeaponDisplay;
+        public string selectedWeaponPrefix = "Selected Weapon: ";
         public GameObject leftWeapon;
         public GameObject rightWeapon;
-        public int selectedWeapon = 0;
 
         [NonSerialized] public bool fireWeapon = false;
 
+        private int _selectedWeapon = 0;
         private int _numberOfWeapons = 0;
-        private float currentCooldown = 0f;
-        private float timeOfExecution = 0f;
-        private int oldWeapon = 0;
+        private float _currentCooldown = 0f;
+        private float _timeOfExecution = 0f;
+        private int _oldWeapon = 0;
+        private int _oldWeaponText = 0;
         private List<Weapon> _weapons = new List<Weapon>();
 
         private void Awake()
@@ -44,27 +72,32 @@ namespace FG
                     _weapons.Add(new Weapon() {Script = tempScript, Name = tempName});
                 }
             }
+
+            UpdateSelectedWeaponDisplay();
             
             _numberOfWeapons = _weapons.Count;
         }
 
         private void Update()
         {
-            
+            if (_oldWeaponText != _selectedWeapon)
+            {
+                UpdateSelectedWeaponDisplay();
+            }
             
             if (fireWeapon)
             {
-                if (oldWeapon != selectedWeapon && timeOfExecution > 0)
+                if (_oldWeapon != _selectedWeapon)
                 {
-                    currentCooldown = 0f;
-                    timeOfExecution = 0f;
-                    oldWeapon = selectedWeapon;
+                    _currentCooldown = 0f;
+                    _timeOfExecution = 0f;
+                    _oldWeapon = _selectedWeapon;
                 }
-                if (Time.unscaledTime - timeOfExecution > currentCooldown && oldWeapon == selectedWeapon)
+                if (Time.unscaledTime - _timeOfExecution > _currentCooldown && _oldWeapon == _selectedWeapon)
                 {
-                    timeOfExecution = Time.unscaledTime;
-                    oldWeapon = selectedWeapon;
-                    currentCooldown = _weapons[selectedWeapon].Script.Shoot();
+                    _timeOfExecution = Time.unscaledTime;
+                    _oldWeapon = _selectedWeapon;
+                    _currentCooldown = _weapons[_selectedWeapon].Script.Shoot();
                 }
             }
         }
@@ -85,6 +118,12 @@ namespace FG
                 tempScript.Enabled = true;
                 Destroy(other.gameObject);
             }
+        }
+
+        private void UpdateSelectedWeaponDisplay()
+        {
+            selectedWeaponDisplay.text = selectedWeaponPrefix + _weapons[_selectedWeapon].Name;
+            _oldWeaponText = _selectedWeapon;
         }
     }
 }

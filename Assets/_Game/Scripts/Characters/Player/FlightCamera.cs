@@ -4,6 +4,8 @@ public class FlightCamera : MonoBehaviour
 {
     public Transform focus;
     public float cameraDistance;
+    public Vector3 offset = Vector3.zero;
+    public Vector3 rotationOffset = Vector3.zero;
 
     private Transform _transform;
 
@@ -16,6 +18,7 @@ public class FlightCamera : MonoBehaviour
     {
         Vector3 lookDirection = _transform.rotation * Vector3.forward;
         Vector3 cameraPosition = focus.position - lookDirection * cameraDistance;
-        _transform.SetPositionAndRotation(cameraPosition, focus.rotation);
+        Quaternion cameraRotation = Quaternion.Euler(focus.rotation.eulerAngles + rotationOffset);
+        _transform.SetPositionAndRotation(cameraPosition + offset, cameraRotation);
     }
 }
