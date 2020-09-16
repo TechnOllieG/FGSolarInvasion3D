@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 5372098317870832308}
   - component: {fileID: 7639444539957535959}
   - component: {fileID: 7639444539957535956}
+  - component: {fileID: -5080844005625035293}
+  - component: {fileID: 7845384974822180082}
   - component: {fileID: 7639444539957535958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AlienFighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +115,41 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.92
   m_Center: {x: 0, y: 0, z: -0.29}
+--- !u!114 &-5080844005625035293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393424073805788028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbab4ecbb5377174eaf73d581d59e9b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedWeaponDisplay: {fileID: 0}
+  selectedWeaponPrefix: 'Selected Weapon: '
+  weaponOutputs:
+  - {fileID: 0}
+  - {fileID: 0}
+  teamID: 1
+--- !u!114 &7845384974822180082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393424073805788028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11516347b64551459b3ae457c61404e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableScript: 0
+  weaponMode: 0
+  coolDown: 1
+  shot: {fileID: 0}
+  bulletSpeed: 1
 --- !u!114 &7639444539957535958
 MonoBehaviour:
   m_ObjectHideFlags: 0

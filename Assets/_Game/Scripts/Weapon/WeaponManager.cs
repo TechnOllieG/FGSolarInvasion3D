@@ -45,10 +45,11 @@ namespace FG
             }
         }
 
+        [Tooltip("Optional text component to display currently selected weapon on screen")]
         public Text selectedWeaponDisplay;
         public string selectedWeaponPrefix = "Selected Weapon: ";
-        public GameObject leftWeapon;
-        public GameObject rightWeapon;
+        [Tooltip("Transforms of empty objects where the ammunition will shoot from")]
+        public Transform[] weaponOutputs = new Transform[2];
 
         [NonSerialized] public bool fireWeapon = false;
 
@@ -73,14 +74,12 @@ namespace FG
                 }
             }
 
-            UpdateSelectedWeaponDisplay();
-            
             _numberOfWeapons = _weapons.Count;
         }
 
         private void Update()
         {
-            if (_oldWeaponText != _selectedWeapon)
+            if (_oldWeaponText != _selectedWeapon && selectedWeaponDisplay != null)
             {
                 UpdateSelectedWeaponDisplay();
             }
@@ -93,9 +92,9 @@ namespace FG
                     _timeOfExecution = 0f;
                     _oldWeapon = _selectedWeapon;
                 }
-                if (Time.unscaledTime - _timeOfExecution > _currentCooldown && _oldWeapon == _selectedWeapon)
+                if (Time.time - _timeOfExecution > _currentCooldown && _oldWeapon == _selectedWeapon)
                 {
-                    _timeOfExecution = Time.unscaledTime;
+                    _timeOfExecution = Time.time;
                     _oldWeapon = _selectedWeapon;
                     _currentCooldown = _weapons[_selectedWeapon].Script.Shoot();
                 }

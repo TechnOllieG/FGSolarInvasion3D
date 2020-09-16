@@ -21,7 +21,7 @@ namespace BK.HierarchyHeader
 
         private void OnDrawGizmos()
         {
-            //locking the postion
+            //locking the position
             transform.position = Vector3.zero;
         }
     }

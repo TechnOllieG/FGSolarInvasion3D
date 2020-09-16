@@ -1,47 +1,43 @@
-﻿using System.Net.Security;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FG
 {
     public class LaserWeapon : BaseWeapon, IWeapon
     {
-        public float coolDown = 1f;
+        public float coolDown = 0.2f;
         public GameObject shot;
-        public float bulletSpeed = 1f;
+        public float bulletSpeed = 500f;
 
-        private byte _alternatingOrder = 0;
+        private int _alternatingOrder = 0;
 
         public float Shoot()
         {
-            GameObject[] currentShot = new GameObject[2];
-            if (shootLeft)
+            GameObject[] currentShot;
+            if (shootAll)
             {
-                currentShot[0] = Instantiate(shot, leftWeaponTransform.position, leftWeaponTransform.rotation);
-            }
-
-            if (shootRight)
-            {
-                currentShot[1] = Instantiate(shot, rightWeaponTransform.position, rightWeaponTransform.rotation);
-            }
-
-            if (alternating)
-            {
-                switch (_alternatingOrder)
+                currentShot = new GameObject[localWeaponOutputs.Length];
+                for (int i = 0; i < localWeaponOutputs.Length; i++)
                 {
-                    case 0: 
-                        currentShot[0] = Instantiate(shot, leftWeaponTransform.position, leftWeaponTransform.rotation);
-                        _alternatingOrder = 1;
-                        break;
-                    case 1:
-                        currentShot[0] = Instantiate(shot, rightWeaponTransform.position, rightWeaponTransform.rotation);
-                        _alternatingOrder = 0;
-                        break;
-                    default:
-                        _alternatingOrder = 0;
-                        goto case 0;
+                    currentShot[i] = Instantiate(shot, localWeaponOutputs[i].position, localWeaponOutputs[i].rotation);
                 }
             }
-            
+            else if (shootAlternating)
+            {
+                currentShot = new GameObject[1];
+                currentShot[0] = Instantiate(shot, localWeaponOutputs[_alternatingOrder].position, localWeaponOutputs[_alternatingOrder].rotation);
+                
+                _alternatingOrder++;
+                if (_alternatingOrder > localWeaponOutputs.Length - 1)
+                {
+                    _alternatingOrder = 0;
+                }
+            }
+            else
+            {
+                Debug.Log("Either shootAll or shootAlternating should be true");
+                return coolDown;
+            }
+
             foreach(GameObject obj in currentShot)
             {
                 Rigidbody tempBody = obj.GetComponent<Rigidbody>();

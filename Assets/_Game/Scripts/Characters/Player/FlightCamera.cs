@@ -16,9 +16,12 @@ public class FlightCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 lookDirection = _transform.rotation * Vector3.forward;
-        Vector3 cameraPosition = focus.position - lookDirection * cameraDistance;
-        Quaternion cameraRotation = Quaternion.Euler(focus.rotation.eulerAngles + rotationOffset);
-        _transform.SetPositionAndRotation(cameraPosition + offset, cameraRotation);
+        if (focus == isActiveAndEnabled)
+        {
+            Vector3 lookDirection = _transform.rotation * Vector3.forward;
+            Vector3 cameraPosition = focus.position - lookDirection * cameraDistance;
+            Quaternion cameraRotation = Quaternion.Euler(focus.rotation.eulerAngles + rotationOffset);
+            _transform.SetPositionAndRotation(cameraPosition + offset, cameraRotation);
+        }
     }
 }

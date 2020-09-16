@@ -2,14 +2,13 @@
 
 namespace FG
 {
+    [RequireComponent(typeof(WeaponManager))]
     public class BaseWeapon : MonoBehaviour
     {
         public enum WeaponMode
         {
-            Twin,
+            All,
             Alternating,
-            LeftOnly,
-            RightOnly
         }
         
         public bool enableScript = false;
@@ -22,49 +21,38 @@ namespace FG
             set => enableScript = value;
         }
 
-        public WeaponMode weaponMode = WeaponMode.Twin;
+        public WeaponMode weaponMode = WeaponMode.All;
+
+        protected bool shootAll = false;
+        protected bool shootAlternating = false;
         
-        protected bool shootLeft = false;
-        protected bool shootRight = false;
-        protected bool alternating = false;
-        
-        protected Transform leftWeaponTransform;
-        protected Transform rightWeaponTransform;
+        protected WeaponManager weaponManager;
+        protected Transform[] localWeaponOutputs;
 
         private void Awake()
         {
-            leftWeaponTransform = GameManager.WeaponManager.leftWeapon.transform;
-            rightWeaponTransform = GameManager.WeaponManager.rightWeapon.transform;
+            weaponManager = GetComponent<WeaponManager>();
+            localWeaponOutputs = weaponManager.weaponOutputs;
         }
 
         private void OnValidate()
         {
-            if (weaponMode == WeaponMode.Twin)
+            switch(weaponMode)
             {
-                shootLeft = true;
-                shootRight = true;
-                alternating = false;
-            }
-
-            if (weaponMode == WeaponMode.Alternating)
-            {
-                shootLeft = false;
-                shootRight = false;
-                alternating = true;
-            }
-
-            if (weaponMode == WeaponMode.LeftOnly)
-            {
-                shootLeft = true;
-                shootRight = false;
-                alternating = false;
-            }
-
-            if (weaponMode == WeaponMode.RightOnly)
-            {
-                shootLeft = false;
-                shootRight = true;
-                alternating = false;
+                case WeaponMode.All:
+                    shootAll = true;
+                    shootAlternating = false;
+                    break;
+                case WeaponMode.Alternating:
+                    if (GetComponent<WeaponManager>().weaponOutputs.Length == 1)
+                    {
+                        Debug.Log("There is only one weapon output, alternating is not an option");
+                        weaponMode = WeaponMode.All;
+                        goto case WeaponMode.All;
+                    }
+                    shootAll = false;
+                    shootAlternating = true;
+                    break;
             }
         }
     }

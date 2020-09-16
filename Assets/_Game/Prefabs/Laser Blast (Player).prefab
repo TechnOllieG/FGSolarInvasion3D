@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6203445667981667146}
   - component: {fileID: 7535425918854967329}
   - component: {fileID: 5911777006109325970}
-  m_Layer: 0
-  m_Name: Laser Blast
+  m_Layer: 8
+  m_Name: Laser Blast (Player)
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

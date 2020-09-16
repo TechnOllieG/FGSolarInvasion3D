@@ -21,6 +21,7 @@ namespace FG
 
         public float mouseSensitivity = 1f;
         public MouseButton shootButton = MouseButton.LeftClick;
+        public WeaponManager turretTest;
         
         private CharacterController _characterController;
         private OrbitCamera _cameraController;
@@ -28,7 +29,7 @@ namespace FG
 
         private void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            _characterController = GameManager.Player.GetComponent<CharacterController>();
             _cameraController = GameManager.PlayerCamera.GetComponent<OrbitCamera>();
             _weaponManager = GameManager.Player.GetComponent<WeaponManager>();
         }
@@ -47,9 +48,14 @@ namespace FG
                 _cameraController.cameraVerticalInput = Input.GetAxis(pitchCamera) * mouseSensitivity;
                 _cameraController.cameraZoomInput = Input.GetAxis(scrollWheel);
             }
+
+            if (_weaponManager == isActiveAndEnabled)
+            {
+                _weaponManager.SelectedWeapon = Convert.ToInt16(Input.GetAxis(scrollWheel) * 10);
+                _weaponManager.fireWeapon = Input.GetMouseButton((int)shootButton);
+            }
             
-            _weaponManager.SelectedWeapon = Convert.ToInt16(Input.GetAxis(scrollWheel) * 10);
-            _weaponManager.fireWeapon = Input.GetMouseButton((int)shootButton);
+            turretTest.fireWeapon = Input.GetMouseButton((int)shootButton);
         }
     }
 }
