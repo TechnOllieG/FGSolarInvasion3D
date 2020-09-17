@@ -41,7 +41,7 @@ namespace FG
             foreach(GameObject obj in currentShot)
             {
                 Rigidbody tempBody = obj.GetComponent<Rigidbody>();
-                tempBody.velocity = bulletSpeed * obj.transform.forward + GetComponent<Rigidbody>().velocity;
+                tempBody.velocity = bulletSpeed * transform.forward + GetComponent<Rigidbody>().velocity;
             }
 
             return coolDown;

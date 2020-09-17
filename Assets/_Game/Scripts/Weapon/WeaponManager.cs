@@ -15,31 +15,31 @@ namespace FG
     {
         public int SelectedWeapon
         {
-            get => _selectedWeapon;
+            get => selectedWeapon;
             set
             {
                 if (value > 0)
                 {
-                    int tempValue = _selectedWeapon + 1;
+                    int tempValue = selectedWeapon + 1;
                     if (tempValue > _numberOfWeapons - 1)
                     {
-                        _selectedWeapon = 0;
+                        selectedWeapon = 0;
                     }
                     else
                     {
-                        _selectedWeapon = tempValue;
+                        selectedWeapon = tempValue;
                     }
                 }
                 else if (value < 0)
                 {
-                    int tempValue = _selectedWeapon - 1;
+                    int tempValue = selectedWeapon - 1;
                     if (tempValue < 0)
                     {
-                        _selectedWeapon = _numberOfWeapons - 1;
+                        selectedWeapon = _numberOfWeapons - 1;
                     }
                     else
                     {
-                        _selectedWeapon = tempValue;
+                        selectedWeapon = tempValue;
                     }
                 }
             }
@@ -50,10 +50,10 @@ namespace FG
         public string selectedWeaponPrefix = "Selected Weapon: ";
         [Tooltip("Transforms of empty objects where the ammunition will shoot from")]
         public Transform[] weaponOutputs = new Transform[2];
+        public int selectedWeapon = 0;
 
         [NonSerialized] public bool fireWeapon = false;
-
-        private int _selectedWeapon = 0;
+        
         private int _numberOfWeapons = 0;
         private float _currentCooldown = 0f;
         private float _timeOfExecution = 0f;
@@ -79,31 +79,31 @@ namespace FG
 
         private void Update()
         {
-            if (_oldWeaponText != _selectedWeapon && selectedWeaponDisplay != null)
+            if (_oldWeaponText != selectedWeapon && selectedWeaponDisplay != null)
             {
                 UpdateSelectedWeaponDisplay();
             }
             
             if (fireWeapon)
             {
-                if (_oldWeapon != _selectedWeapon)
+                if (_oldWeapon != selectedWeapon)
                 {
                     _currentCooldown = 0f;
                     _timeOfExecution = 0f;
-                    _oldWeapon = _selectedWeapon;
+                    _oldWeapon = selectedWeapon;
                 }
-                if (Time.time - _timeOfExecution > _currentCooldown && _oldWeapon == _selectedWeapon)
+                if (Time.time - _timeOfExecution > _currentCooldown && _oldWeapon == selectedWeapon)
                 {
                     _timeOfExecution = Time.time;
-                    _oldWeapon = _selectedWeapon;
-                    _currentCooldown = _weapons[_selectedWeapon].Script.Shoot();
+                    _oldWeapon = selectedWeapon;
+                    _currentCooldown = _weapons[selectedWeapon].Script.Shoot();
                 }
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("WeaponPickup"))
+            if (other.CompareTag("WeaponPickup") && CompareTag("Player"))
             {
                 WeaponPickup currentPickup = other.gameObject.GetComponent<WeaponPickup>();
                 string scriptName = currentPickup.script;
@@ -121,8 +121,8 @@ namespace FG
 
         private void UpdateSelectedWeaponDisplay()
         {
-            selectedWeaponDisplay.text = selectedWeaponPrefix + _weapons[_selectedWeapon].Name;
-            _oldWeaponText = _selectedWeapon;
+            selectedWeaponDisplay.text = selectedWeaponPrefix + _weapons[selectedWeapon].Name;
+            _oldWeaponText = selectedWeapon;
         }
     }
 }

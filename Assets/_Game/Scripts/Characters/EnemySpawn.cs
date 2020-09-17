@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Assertions;
 
 namespace FG
 {
@@ -7,15 +8,15 @@ namespace FG
     {
         #region Inspector
         public GameObject[] enemyPrefabs = new GameObject[1];
-        [Tooltip("The minimum distance from the player the enemy should spawn"), Range(100f, 5000f)]
+        [Tooltip("The minimum distance from the player the enemy should spawn"), Range(100f, 5000f), Space]
         public float minDistanceFromPlayer = 20f;
         [Tooltip("The maximum distance from the player the enemy should spawn"), Range(100f, 5000f)]
         public float maxDistanceFromPlayer = 30f;
-        [Tooltip("The minimum cooldown (chosen randomly) before spawning a new enemy, expressed in seconds"), Range(0.5f, 60f)]
+        [Tooltip("The minimum cooldown (chosen randomly) before spawning a new enemy, expressed in seconds"), Range(0.5f, 60f), Space]
         public float minCooldown = 5f;
         [Tooltip("The maximum cooldown (chosen randomly) before spawning a new enemy, expressed in seconds"), Range(0.5f, 60f)]
         public float maxCooldown = 10f;
-        [Tooltip("The radius around the determined random position that should be clear of any colliders for the position to be valid"), Range(1f, 20f)]
+        [Tooltip("The radius around the determined random position that should be clear of any colliders for the position to be valid"), Range(1f, 20f), Space]
         public float clearRadius = 2f;
         #endregion
 
@@ -39,6 +40,7 @@ namespace FG
         private void Awake()
         {
             _playerTransform = GameManager.Player.transform;
+            Assert.IsNotNull(_playerTransform, "Player's transform cannot be accessed by EnemySpawn script through GameManager");
         }
 
         private void OnEnable()
@@ -67,21 +69,14 @@ namespace FG
                     }
                 }
 
-                float facingAngleY = GetAngle(new Vector2(direction.x, direction.z));
-                Quaternion enemyRotation = Quaternion.Euler(0, facingAngleY, 0);
-
                 int enemyType = Random.Range(0, enemyPrefabs.Length - 1);
 
-                Instantiate(enemyPrefabs[enemyType], enemyPosition, enemyRotation);
+                Transform currentEnemy = Instantiate(enemyPrefabs[enemyType], enemyPosition, Quaternion.identity).transform;
+                currentEnemy.LookAt(_playerTransform);
+
                 float timeToWait = Random.Range(minCooldown, maxCooldown);
                 yield return new WaitForSeconds(timeToWait);
             }
-        }
-        
-        private static float GetAngle(Vector2 direction)
-        {
-            float angle = Mathf.Acos(direction.y) * Mathf.Rad2Deg;
-            return direction.x < 0f ? 360f - angle : angle;
         }
     }
 }

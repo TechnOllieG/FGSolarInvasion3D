@@ -25,17 +25,23 @@ namespace FG
 
         protected bool shootAll = false;
         protected bool shootAlternating = false;
-        
-        protected WeaponManager weaponManager;
         protected Transform[] localWeaponOutputs;
+        
+        private WeaponManager _weaponManager;
 
         private void Awake()
         {
-            weaponManager = GetComponent<WeaponManager>();
-            localWeaponOutputs = weaponManager.weaponOutputs;
+            _weaponManager = GetComponent<WeaponManager>();
+            localWeaponOutputs = _weaponManager.weaponOutputs;
+            SetWeaponMode();
         }
 
         private void OnValidate()
+        {
+            SetWeaponMode();
+        }
+
+        private void SetWeaponMode()
         {
             switch(weaponMode)
             {

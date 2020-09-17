@@ -21,8 +21,7 @@ namespace FG
 
         public float mouseSensitivity = 1f;
         public MouseButton shootButton = MouseButton.LeftClick;
-        public WeaponManager turretTest;
-        
+
         private CharacterController _characterController;
         private OrbitCamera _cameraController;
         private WeaponManager _weaponManager;
@@ -54,8 +53,6 @@ namespace FG
                 _weaponManager.SelectedWeapon = Convert.ToInt16(Input.GetAxis(scrollWheel) * 10);
                 _weaponManager.fireWeapon = Input.GetMouseButton((int)shootButton);
             }
-            
-            turretTest.fireWeapon = Input.GetMouseButton((int)shootButton);
         }
     }
 }
