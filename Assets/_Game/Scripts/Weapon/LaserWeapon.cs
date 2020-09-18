@@ -18,13 +18,13 @@ namespace FG
                 currentShot = new GameObject[localWeaponOutputs.Length];
                 for (int i = 0; i < localWeaponOutputs.Length; i++)
                 {
-                    currentShot[i] = Instantiate(shot, localWeaponOutputs[i].position, localWeaponOutputs[i].rotation);
+                    currentShot[i] = Instantiate(shot, localWeaponOutputs[i].position, transform.rotation);
                 }
             }
             else if (shootAlternating)
             {
                 currentShot = new GameObject[1];
-                currentShot[0] = Instantiate(shot, localWeaponOutputs[_alternatingOrder].position, localWeaponOutputs[_alternatingOrder].rotation);
+                currentShot[0] = Instantiate(shot, localWeaponOutputs[_alternatingOrder].position, Quaternion.Euler(transform.forward));
                 
                 _alternatingOrder++;
                 if (_alternatingOrder > localWeaponOutputs.Length - 1)

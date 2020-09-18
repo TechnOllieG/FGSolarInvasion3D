@@ -30,27 +30,34 @@ namespace FG
 
         private void FixedUpdate()
         {
-            if (_rigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed) // if enemies velocity is over maxSpeed
+            if (_playerTransform == isActiveAndEnabled)
             {
-                _accelerate = false;
-            }
-            else
-            {
-                _accelerate = true;
-            }
-
-            float distance = Vector3.Distance(_playerTransform.position, transform.position);
-
-            if (distance <= detectionRange) // if player is in range
-            {
-                _transform.LookAt(_playerTransform);
-
-                if (_accelerate)
+                if (_rigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed) // if enemies velocity is over maxSpeed
                 {
-                    _rigidbody.AddForce((accelerationMultiplier * Time.fixedDeltaTime) * _transform.forward);
+                    _accelerate = false;
+                }
+                else
+                {
+                    _accelerate = true;
                 }
 
-                _weaponManager.fireWeapon = true;
+                float distance = Vector3.Distance(_playerTransform.position, transform.position);
+
+                if (distance <= detectionRange) // if player is in range
+                {
+                    _transform.LookAt(_playerTransform);
+
+                    if (_accelerate)
+                    {
+                        _rigidbody.AddForce((accelerationMultiplier * Time.fixedDeltaTime) * _transform.forward);
+                    }
+
+                    _weaponManager.fireWeapon = true;
+                }
+                else
+                {
+                    _weaponManager.fireWeapon = false;
+                }
             }
             else
             {

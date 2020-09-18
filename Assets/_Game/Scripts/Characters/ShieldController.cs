@@ -11,6 +11,8 @@ namespace FG
         public GameObject shieldObject;
         public float hitPoints = 10f;
         public float shieldCooldown = 10f;
+        public GameObject particleWhenHit;
+        public float particlePlayLength = 1.5f;
         
         private float _initialHitPoints;
         private Transform _transform;
@@ -42,14 +44,19 @@ namespace FG
             else
             {
                 shieldEnabled = false;
+                shieldObject.SetActive(false);
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            Shot shotScript = other.GetComponent<Shot>();
             if (other.CompareTag("Weapon"))
             {
+                Shot shotScript = other.GetComponent<Shot>();
+                if (particleWhenHit != null)
+                {
+                    Destroy(Instantiate(particleWhenHit, other.transform.position, Quaternion.identity, _transform), particlePlayLength);
+                }
                 StartCoroutine(Damage(shotScript.damageToApply));
                 Destroy(other.gameObject);
             }

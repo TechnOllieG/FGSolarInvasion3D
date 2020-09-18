@@ -14,6 +14,7 @@ namespace FG
         #region InputIDs
         private const string leftRightMovement = "Horizontal";
         private const string forwardBackMovement = "Vertical";
+        private const string rollMovement = "Roll";
         private const string scrollWheel = "Mouse ScrollWheel";
         private const string orbitCamera = "Mouse X";
         private const string pitchCamera = "Mouse Y";
@@ -23,13 +24,11 @@ namespace FG
         public MouseButton shootButton = MouseButton.LeftClick;
 
         private CharacterController _characterController;
-        private OrbitCamera _cameraController;
         private WeaponManager _weaponManager;
 
         private void Awake()
         {
             _characterController = GameManager.Player.GetComponent<CharacterController>();
-            _cameraController = GameManager.PlayerCamera.GetComponent<OrbitCamera>();
             _weaponManager = GameManager.Player.GetComponent<WeaponManager>();
         }
 
@@ -39,13 +38,7 @@ namespace FG
             {
                 _characterController.forwardBackInput = Input.GetAxis(forwardBackMovement);
                 _characterController.leftRightInput = Input.GetAxis(leftRightMovement);
-            }
-
-            if (_cameraController == isActiveAndEnabled)
-            {
-                _cameraController.cameraHorizontalInput = Input.GetAxis(orbitCamera) * mouseSensitivity;
-                _cameraController.cameraVerticalInput = Input.GetAxis(pitchCamera) * mouseSensitivity;
-                _cameraController.cameraZoomInput = Input.GetAxis(scrollWheel);
+                _characterController.rollInput = Input.GetAxis(rollMovement);
             }
 
             if (_weaponManager == isActiveAndEnabled)

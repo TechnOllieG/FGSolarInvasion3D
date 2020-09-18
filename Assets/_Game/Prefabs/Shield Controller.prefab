@@ -121,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3948287385053789852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3408.9905, y: 0.4152863, z: -10144.76}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children:
   - {fileID: 6927875920896634185}
@@ -161,3 +161,5 @@ MonoBehaviour:
   shieldObject: {fileID: 3853253590216687621}
   hitPoints: 20
   shieldCooldown: 20
+  particleWhenHit: {fileID: 0}
+  particlePlayLength: 1.5

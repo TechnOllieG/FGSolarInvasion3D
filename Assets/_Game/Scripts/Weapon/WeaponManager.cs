@@ -79,7 +79,7 @@ namespace FG
 
         private void Update()
         {
-            if (_oldWeaponText != selectedWeapon && selectedWeaponDisplay != null)
+            if (_oldWeaponText != selectedWeapon && selectedWeaponDisplay == isActiveAndEnabled)
             {
                 UpdateSelectedWeaponDisplay();
             }

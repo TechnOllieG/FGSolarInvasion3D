@@ -186,7 +186,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8888612023890860305}
-  - component: {fileID: 8888612023890860304}
   - component: {fileID: 8888612023890860311}
   - component: {fileID: 8888612023890860310}
   - component: {fileID: 1052060463}
@@ -215,21 +214,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8888612023890860304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8888612023890860309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 511fc8649e797df4d8efb5f51b2be9c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 10
-  shootButton: 0
-  turretTest: {fileID: 0}
 --- !u!54 &8888612023890860311
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -262,6 +246,7 @@ MonoBehaviour:
   minInputMagnitude: 0.01
   pitchSpeed: 2
   yawSpeed: 2
+  rollSpeed: 2
 --- !u!114 &1052060463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +264,7 @@ MonoBehaviour:
   weaponOutputs:
   - {fileID: 8888612024558767994}
   - {fileID: 8888612023370174122}
+  selectedWeapon: 0
 --- !u!114 &1052060460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +310,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 20
+  particleWhenHit: {fileID: 0}
+  particleWhenKilled: {fileID: 0}
+  particlePlayLength: 3
+  smallCollisionForce: 100
+  smallCollisionDamage: 5
+  bigCollisionForce: 200
+  bigCollisionDamage: 10
 --- !u!1001 &8888612023057717596
 PrefabInstance:
   m_ObjectHideFlags: 0

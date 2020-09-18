@@ -50,7 +50,7 @@ namespace FG
 
         private IEnumerator SpawnEnemy()
         {
-            while (true)
+            while (true && _playerTransform == isActiveAndEnabled)
             {
                 Vector3 direction = _playerTransform.forward;
                 Vector3 enemyPosition = _playerTransform.position;

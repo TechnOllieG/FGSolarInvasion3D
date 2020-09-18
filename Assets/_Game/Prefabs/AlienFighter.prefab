@@ -226,6 +226,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 20
+  particleWhenHit: {fileID: 8381748512191098914, guid: c8a6461116468ce45a6474e82bd46953, type: 3}
+  particleWhenKilled: {fileID: 7951804774092552128, guid: c71c4762fa558da4cbabf5aca8ae7333, type: 3}
+  particlePlayLength: 1.5
+  smallCollisionForce: 100
+  smallCollisionDamage: 5
+  bigCollisionForce: 200
+  bigCollisionDamage: 10
 --- !u!114 &-242189651437040252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,4 +247,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 500
   maxSpeed: 100
-  accelerationMultiplier: 50
+  accelerationMultiplier: 100

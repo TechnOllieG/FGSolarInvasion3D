@@ -1,6 +1,16 @@
 ﻿using UnityEngine;
 
-public class Shot : MonoBehaviour
+namespace FG
 {
-    public float damageToApply = 0f;
+    public class Shot : MonoBehaviour
+    {
+        public float damageToApply = 2f;
+        [Tooltip("How long until despawning shot")]
+        public float despawnTime = 10f;
+
+        private void Awake()
+        {
+            Destroy(transform.parent.gameObject, despawnTime);
+        }
+    }
 }
