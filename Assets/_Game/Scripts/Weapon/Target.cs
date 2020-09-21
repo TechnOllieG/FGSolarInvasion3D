@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace FG
 {
@@ -16,7 +16,7 @@ namespace FG
         public float bigCollisionForce = 200f;
         public float bigCollisionDamage = 10f;
 
-        [NonSerialized] public CanvasManager canvasManager;
+        private CanvasManager _canvasManager;
         
         private WeaponManager _weaponManager;
         private Transform _transform;
@@ -24,6 +24,14 @@ namespace FG
         private void Awake()
         {
             _transform = transform;
+            try
+            {
+                _canvasManager = GameManager.CanvasManagerInstance;
+            }
+            catch
+            {
+                Debug.Log("CanvasManager not found, assuming this is intentional");
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -63,6 +71,10 @@ namespace FG
         private void Damage(float damage)
         {
             hitPoints -= damage;
+            if (CompareTag("Player"))
+            {
+                _canvasManager.UpdateHP(hitPoints);
+            }
             if (hitPoints <= 0)
             {
                 if (particleWhenKilled != null)
@@ -70,9 +82,13 @@ namespace FG
                     Destroy(Instantiate(particleWhenKilled, _transform.position, Quaternion.identity), particlePlayLength);
                 }
                 Debug.Log(name + " has died/been destroyed");
-                if (CompareTag("Player") && canvasManager == isActiveAndEnabled)
+                if (CompareTag("Player"))
                 {
-                    canvasManager.GameOver();
+                    _canvasManager.GameOver();
+                }
+                else if (CompareTag("Enemy"))
+                {
+                    GameManager.PlayerPoints++;
                 }
                 Destroy(gameObject);
             }

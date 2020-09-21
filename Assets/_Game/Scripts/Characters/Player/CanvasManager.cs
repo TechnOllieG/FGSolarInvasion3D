@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 namespace FG
 {
@@ -8,21 +8,23 @@ namespace FG
     {
         public GameObject gameOverMenu;
         public GameObject selectedWeaponDisplay;
-        public float gameOverMenuDelay = 2f;
-            
-        private GameObject _player;
-        private Target _playerTargetScript;
         
-        private void Awake()
-        {
-            _player = GameManager.Player;
-            Assert.IsNotNull(_player, "CanvasManager could not find player game object through GameManager");
-            _playerTargetScript = _player.GetComponent<Target>();
-            Assert.IsNotNull(_playerTargetScript, "CanvasManager could not find Target script on player");
+        public Text pointDisplay;
+        public string pointDisplayPrefix = "Points: ";
+        public Text hpDisplay;
+        public string hpDisplayPrefix = "HP:";
+        
+        public float gameOverMenuDelay = 2f;
 
-            _playerTargetScript.canvasManager = this;
+        public void UpdatePoints(int currentPoints)
+        {
+            pointDisplay.text = pointDisplayPrefix + currentPoints;
         }
 
+        public void UpdateHP(float currentHitpoints)
+        {
+            hpDisplay.text = hpDisplayPrefix + currentHitpoints;
+        }
 
         public void GameOver()
         {

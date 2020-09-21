@@ -7,6 +7,8 @@ TagManager:
   - WeaponPickup
   - Weapon
   - Shield
+  - Enemy
+  - CanvasManager
   layers:
   - Default
   - TransparentFX
