@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 270313271}
   - component: {fileID: 270313270}
   m_Layer: 5
-  m_Name: Missile Crosshair
+  m_Name: Target Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1218,12 +1218,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverMenu: {fileID: 846154590}
+  gameOverMenuDelay: 2
   selectedWeaponDisplay: {fileID: 528803029}
   pointDisplay: {fileID: 618795471}
   pointDisplayPrefix: 'Points: '
   hpDisplay: {fileID: 501152717}
   hpDisplayPrefix: 'HP: '
-  gameOverMenuDelay: 2
+  crosshair: {fileID: 1520476752}
+  homingTargetCrosshair: {fileID: 270313270}
+  defaultCrosshairColor: {r: 1, g: 1, b: 1, a: 1}
+  homingLockedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &910409908
 Transform:
   m_ObjectHideFlags: 0
@@ -2194,7 +2198,7 @@ GameObject:
   - component: {fileID: 1520476753}
   - component: {fileID: 1520476752}
   m_Layer: 5
-  m_Name: Crosshair
+  m_Name: Missile Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2694,11 +2698,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: coolDown
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: weaponMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: sphereCastLayerMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: shot
+      value: 
+      objectReference: {fileID: 5731663853949403382, guid: 1f7ac6e4f9bdcdb48911011c77b55ee5, type: 3}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: bulletSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: enableScript
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: radiusOfSphereCast
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: maxSphereCastRange
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1052060463, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: selectedWeaponDisplay
@@ -2727,6 +2759,10 @@ PrefabInstance:
     - target: {fileID: 6620342735141153046, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: bigCollisionForce
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6620342735141153046, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: hitPoints
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8888612023890860304, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: turretTest
@@ -2787,6 +2823,10 @@ PrefabInstance:
     - target: {fileID: 8888612023890860310, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: rollSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888612023890860310, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: baseSpeed
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8888612023890860304, guid: 7de1c111016f69141adb65d36060fa40, type: 3}

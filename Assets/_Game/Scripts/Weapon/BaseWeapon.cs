@@ -13,7 +13,7 @@ namespace FG
         
         public bool enableScript = false;
 
-        public string Name => GetType().Name.ToString();
+        public string Name => GetType().Name;
 
         public bool Enabled
         {
@@ -26,13 +26,16 @@ namespace FG
         protected bool shootAll = false;
         protected bool shootAlternating = false;
         protected Transform[] localWeaponOutputs;
-        
-        private WeaponManager _weaponManager;
+        protected Transform cameraTransform;
+        protected WeaponManager weaponManager;
+        protected CanvasManager canvasManager;
 
         private void Awake()
         {
-            _weaponManager = GetComponent<WeaponManager>();
-            localWeaponOutputs = _weaponManager.weaponOutputs;
+            weaponManager = GetComponent<WeaponManager>();
+            localWeaponOutputs = weaponManager.weaponOutputs;
+            cameraTransform = GameManager.PlayerCamera.transform;
+            canvasManager = GameManager.CanvasManagerInstance;
             SetWeaponMode();
         }
 

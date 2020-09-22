@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace FG
 {
@@ -36,14 +35,15 @@ namespace FG
 
         private void OnTriggerEnter(Collider other)
         {
-            Shot shotScript = other.GetComponent<Shot>();
+            IShot shotScript = other.GetComponent<IShot>();
+            
             if (other.CompareTag("Weapon"))
             {
                 if (particleWhenHit != null)
                 {
                     Destroy(Instantiate(particleWhenHit, other.transform.position, Quaternion.identity, _transform), particlePlayLength);
                 }
-                Damage(shotScript.damageToApply);
+                Damage(shotScript.DamageToApply);
                 Destroy(other.gameObject);
             }
         }

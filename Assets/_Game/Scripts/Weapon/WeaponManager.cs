@@ -18,10 +18,11 @@ namespace FG
             get => selectedWeapon;
             set
             {
+                // if input value (probably scrollwheel unless changed) is positive
                 if (value > 0)
                 {
                     int tempValue = selectedWeapon + 1;
-                    if (tempValue > _numberOfWeapons - 1)
+                    if (tempValue > weapons.Count - 1) // If the new value to be set is higher than the maximum index of the list
                     {
                         selectedWeapon = 0;
                     }
@@ -35,7 +36,7 @@ namespace FG
                     int tempValue = selectedWeapon - 1;
                     if (tempValue < 0)
                     {
-                        selectedWeapon = _numberOfWeapons - 1;
+                        selectedWeapon = weapons.Count - 1;
                     }
                     else
                     {
@@ -53,32 +54,32 @@ namespace FG
         public int selectedWeapon = 0;
 
         [NonSerialized] public bool fireWeapon = false;
+        [NonSerialized] public List<Weapon> weapons = new List<Weapon>();
         
-        private int _numberOfWeapons = 0;
         private float _currentCooldown = 0f;
         private float _timeOfExecution = 0f;
         private int _oldWeapon = 0;
         private int _oldWeaponText = 0;
-        private List<Weapon> _weapons = new List<Weapon>();
 
         private void Awake()
         {
+            // Creates temporary array to hold all IWeapon scripts attached to this.gameObject
             IWeapon[] tempWeapons = GetComponents<IWeapon>();
 
+            // Adds all enabled IWeapon scripts to the list
             foreach (IWeapon tempScript in tempWeapons)
             {
                 if (tempScript.Enabled)
                 {
                     string tempName = tempScript.Name;
-                    _weapons.Add(new Weapon() {Script = tempScript, Name = tempName});
+                    weapons.Add(new Weapon() {Script = tempScript, Name = tempName});
                 }
             }
-
-            _numberOfWeapons = _weapons.Count;
         }
 
         private void Update()
         {
+            // Updates UI Text object that states which weapon is currently selected (if selectedWeaponDisplay is assigned)
             if (_oldWeaponText != selectedWeapon && selectedWeaponDisplay == isActiveAndEnabled)
             {
                 UpdateSelectedWeaponDisplay();
@@ -86,17 +87,19 @@ namespace FG
             
             if (fireWeapon)
             {
+                // Resets cooldown if weapon is changed
                 if (_oldWeapon != selectedWeapon)
                 {
                     _currentCooldown = 0f;
                     _timeOfExecution = 0f;
                     _oldWeapon = selectedWeapon;
                 }
+                // Fires the currently selected weapon if cooldown is over
                 if (Time.time - _timeOfExecution > _currentCooldown && _oldWeapon == selectedWeapon)
                 {
                     _timeOfExecution = Time.time;
                     _oldWeapon = selectedWeapon;
-                    _currentCooldown = _weapons[selectedWeapon].Script.Shoot();
+                    _currentCooldown = weapons[selectedWeapon].Script.Shoot();
                 }
             }
         }
@@ -105,15 +108,16 @@ namespace FG
         {
             if (other.CompareTag("WeaponPickup") && CompareTag("Player"))
             {
+                // Gets the string that holds the name of the script to enable from the pickup
                 WeaponPickup currentPickup = other.gameObject.GetComponent<WeaponPickup>();
                 string scriptName = currentPickup.script;
                 
+                // Gets the component attached to the player with the script name that is equal to the string in the pickup
                 IWeapon tempScript = (IWeapon)GetComponent(scriptName);
                 string tempName = tempScript.Name;
 
-                _weapons.Add(new Weapon() {Script = tempScript, Name = tempName});
-                _numberOfWeapons = _weapons.Count;
-                
+                // Adds the relevant script to the list, enables it and destroys the pickup
+                weapons.Add(new Weapon() {Script = tempScript, Name = tempName});
                 tempScript.Enabled = true;
                 Destroy(other.gameObject);
             }
@@ -121,7 +125,7 @@ namespace FG
 
         private void UpdateSelectedWeaponDisplay()
         {
-            selectedWeaponDisplay.text = selectedWeaponPrefix + _weapons[selectedWeapon].Name;
+            selectedWeaponDisplay.text = selectedWeaponPrefix + weapons[selectedWeapon].Name;
             _oldWeaponText = selectedWeapon;
         }
     }
