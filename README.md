@@ -1,5 +1,7 @@
 # FGSolarInvasion3D
-Solar Invasion 3D is a 3d third-person space shooter developed by myself at Futuregames
+<em>Solar Invasion 3D is a 3d third-person space shooter developed by myself at Futuregames</em><br>
+<b>For builds: Go and download the latest build from releases</b>
+
 
 Features include:
 - Two different weapons, laser weapon and homing missile.
