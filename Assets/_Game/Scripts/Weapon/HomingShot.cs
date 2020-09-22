@@ -8,15 +8,13 @@ namespace FG
         public float DamageToApply
         {
             get => damageToApply;
-            set => damageToApply = value;
         }
 
-        public Transform target;
-        public float damageToApply = 15f;
-        [Tooltip("How long until despawning shot")]
-        public float despawnTime = 20f;
+        [NonSerialized] public Transform target;
+        [NonSerialized] public float damageToApply = 20f;
+        [NonSerialized] public float despawnTime = 20f;
 
-        [NonSerialized] public float speed;
+        [NonSerialized] public float speed = 0f;
 
         private Rigidbody _rigidbody;
         private Transform _transform;
@@ -24,8 +22,7 @@ namespace FG
         private void Awake()
         {
             _transform = transform;
-            _rigidbody = GetComponent<Rigidbody>();
-            Destroy(gameObject, despawnTime);
+            _rigidbody = GetComponentInParent<Rigidbody>();
         }
 
         private void Update()
@@ -35,6 +32,11 @@ namespace FG
                 transform.LookAt(target);
             }
             _rigidbody.velocity = speed * _transform.forward;
+        }
+
+        public void DelayedDestroy()
+        {
+            Destroy(transform.parent.gameObject, despawnTime);
         }
     }
 }

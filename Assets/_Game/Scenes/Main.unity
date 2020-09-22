@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c98cef41460654ca56121b81ee8f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  script: Missile
+  script: HomingMissile
   choiceIndex: 1
   animateSpin: 1
   animationSpinSpeed: 30
@@ -2698,7 +2698,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: coolDown
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: weaponMode
@@ -2730,7 +2730,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: maxSphereCastRange
-      value: 100
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: debugSphereCast
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052060459, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
+      propertyPath: delayUntilLockedOn
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1052060463, guid: 7de1c111016f69141adb65d36060fa40, type: 3}
       propertyPath: selectedWeaponDisplay

@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 784736058415091925}
   - component: {fileID: 960182644349096021}
   - component: {fileID: 1049483679982385639}
-  - component: {fileID: 6189154839217263998}
+  - component: {fileID: 167745097126724276}
   m_Layer: 10
   m_Name: Laser Blast (Player)
   m_TagString: Weapon
@@ -145,7 +145,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6189154839217263998
+--- !u!114 &167745097126724276
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

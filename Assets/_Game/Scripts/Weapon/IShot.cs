@@ -2,6 +2,6 @@
 {
     public interface IShot
     {
-        float DamageToApply { get; set; }
+        float DamageToApply { get; }
     }
 }

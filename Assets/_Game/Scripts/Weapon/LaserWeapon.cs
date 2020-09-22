@@ -7,6 +7,8 @@ namespace FG
         public float coolDown = 0.2f;
         public GameObject shot;
         public float bulletSpeed = 500f;
+        public float damageToApply = 2f;
+        public float despawnTime = 10f;
 
         private int _alternatingOrder = 0;
 
@@ -24,7 +26,7 @@ namespace FG
             else if (shootAlternating)
             {
                 currentShot = new GameObject[1];
-                currentShot[0] = Instantiate(shot, localWeaponOutputs[_alternatingOrder].position, Quaternion.Euler(transform.forward));
+                currentShot[0] = Instantiate(shot, localWeaponOutputs[_alternatingOrder].position, transform.rotation);
                 
                 _alternatingOrder++;
                 if (_alternatingOrder > localWeaponOutputs.Length - 1)
@@ -40,6 +42,10 @@ namespace FG
 
             foreach(GameObject obj in currentShot)
             {
+                Shot shotScript = obj.GetComponentInChildren<Shot>();
+                shotScript.damageToApply = damageToApply;
+                shotScript.despawnTime = despawnTime;
+                
                 Rigidbody tempBody = obj.GetComponent<Rigidbody>();
                 tempBody.velocity = bulletSpeed * transform.forward + GetComponent<Rigidbody>().velocity;
             }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1569391219758916408}
   - component: {fileID: 1998392137816544160}
   - component: {fileID: 6442214232510628041}
+  - component: {fileID: 4780129560957325302}
   m_Layer: 10
   m_Name: Missile
   m_TagString: Weapon
@@ -99,6 +100,21 @@ CapsuleCollider:
   m_Height: 26.055773
   m_Direction: 1
   m_Center: {x: 1.937396, y: -9.102093, z: -0.021778828}
+--- !u!114 &4780129560957325302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517865440915725491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0827e26118bc77049aff0e91b5cde694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  damageToApply: 20
+  despawnTime: 20
 --- !u!1 &5731663853949403382
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +125,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5731663853949403381}
   - component: {fileID: 5731663853949403379}
-  - component: {fileID: 8209210686558340216}
   m_Layer: 10
   m_Name: Missile Parent
   m_TagString: Weapon
@@ -148,18 +163,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &8209210686558340216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5731663853949403382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0827e26118bc77049aff0e91b5cde694, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  damageToApply: 15
-  despawnTime: 20
